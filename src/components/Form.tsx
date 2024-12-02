@@ -1,20 +1,24 @@
 import { useState, ChangeEvent } from "react";
 import { categories } from "../data/categories";
+import { Activity } from "../types";
 
 export default function Form() {
-
-  const [activity, setActivity] = useState({
+  const [activity, setActivity] = useState<Activity>({
     category: 1,
     activityName: "",
-    calories: 0
+    calories: 0,
   });
 
-  const handleChange = (e: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>
+  ) => {
+    const isNumberField = ["category", "calories"].includes(e.target.id);
+
     setActivity({
       ...activity,
-      [e.target.id]: e.target.value
-    })
-  }
+      [e.target.id]: isNumberField ? +e.target.value : e.target.value,
+    });
+  };
 
   return (
     <form className="bg-white space-y-5 shadow p-10 rounded-lg">
@@ -29,7 +33,7 @@ export default function Form() {
           onChange={handleChange}
         >
           {categories.map((category) => (
-            <option key={category.id} value={category.name}>
+            <option key={category.id} value={category.id}>
               {category.name}
             </option>
           ))}
@@ -67,7 +71,7 @@ export default function Form() {
       <input
         type="submit"
         className="bg-slate-800 hover:bg-slate-900 w-full p-2 font-bold uppercase text-white cursor-pointer"
-        value='Guardar comida o ejercicio'
+        value="Guardar comida o ejercicio"
       />
     </form>
   );
