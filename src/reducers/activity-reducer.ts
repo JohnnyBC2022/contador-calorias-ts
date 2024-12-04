@@ -14,7 +14,7 @@ export type ActivityState = {
     activeId: Activity['id']
 }
 
-const localStorageActivities = (): Activity[]=>{
+const localStorageActivities = (): Activity[] => {
     const activities = localStorage.getItem('activities');
     return activities ? JSON.parse(activities) : [];
 }
@@ -59,7 +59,7 @@ export const activityReducer = (
         }
     }
 
-    if(action.type === 'restart-app'){
+    if (action.type === 'restart-app') {
         return {
             activities: [],
             activeId: ''

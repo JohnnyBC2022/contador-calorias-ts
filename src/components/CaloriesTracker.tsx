@@ -28,7 +28,10 @@ function CaloriesTracker({ activities }: CaloriesTrackerProps) {
     [activities]
   );
 
-  const netCalories = useMemo(()=>caloriesConsumed - caloriesBurned,[activities])
+  const netCalories = useMemo(
+    () => caloriesConsumed - caloriesBurned,
+    [activities]
+  );
 
   return (
     <>
@@ -36,19 +39,11 @@ function CaloriesTracker({ activities }: CaloriesTrackerProps) {
         Resumen de calorías
       </h2>
       <div className="flex flex-col items-center md:flex-row md:justify-between gap-5 mt-10">
-        <CaloriesDisplay
-         calories={caloriesConsumed} text="Consumidas"
-        />
+        <CaloriesDisplay calories={caloriesConsumed} text="Consumidas" />
 
-        <CaloriesDisplay
-         calories={caloriesBurned}
-         text="Quemadas"
-        />
+        <CaloriesDisplay calories={caloriesBurned} text="Quemadas" />
 
-        <CaloriesDisplay
-         calories={netCalories}
-         text="Diferencia"
-        />
+        <CaloriesDisplay calories={netCalories} text="Diferencia" />
       </div>
     </>
   );
